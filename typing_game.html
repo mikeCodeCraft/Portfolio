@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Game | MikeCodeCraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+         .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('keyboard.');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+         }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .screenshot {
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .screenshot:hover {
+            transform: scale(1.02);
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .game-preview {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold gradient-text">mikeCodeCraft</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="index.html#about" class="nav-link px-3 py-2 text-sm font-medium">About</a>
+                        <a href="index.html#skills" class="nav-link px-3 py-2 text-sm font-medium">Skills</a>
+                        <a href="projects.html" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+                        <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-indigo-500 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class=" pt-32 pb-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mb-4">Python GUI Application</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Typing Speed Game</h1>
+                    <p class="text-xl max-w-3xl">A desktop application that tests and improves your typing speed with programming terminology</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/mikeCodeCraft/Python_Mini_Projects/blob/main/typingGame.py" target="_blank" class="px-6 py-3 bg-white text-indigo-600 rounded-full font-medium hover:bg-gray-100 transition flex items-center">
+                        <i class="fab fa-github mr-2"></i> View on GitHub
+                    </a>
+                    <a href="#projects" class="px-6 py-3 border border-white text-white rounded-full font-medium hover:bg-white hover:text-indigo-600 transition">
+                        Back to Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Project Overview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Project Overview</h2>
+                        <div class="prose max-w-none text-gray-600">
+                            <p class="mb-4">The Typing Speed Game is a Python application built with Tkinter that helps users measure and improve their typing speed using programming terminology. It features a timed challenge where users type as many words correctly as possible within 60 seconds.</p>
+                            <p class="mb-4">This project was developed to help programmers practice typing while familiarizing themselves with common programming terms. The game provides immediate feedback on each word typed and calculates words-per-minute (WPM) at the end of the session.</p>
+                            <p>The application includes a clean graphical interface, randomized word selection, real-time feedback, and comprehensive statistics at the end of each game session.</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Key Features</h2>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="feature-icon bg-indigo-100 text-indigo-600">
+                                    <i class="fas fa-keyboard text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Programming Terminology</h3>
+                                    <p class="text-gray-600">Uses a curated list of programming terms (python, function, loop, etc.) to help developers practice relevant vocabulary.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-purple-100 text-purple-600">
+                                    <i class="fas fa-stopwatch text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Timed Challenge</h3>
+                                    <p class="text-gray-600">60-second countdown timer creates a sense of urgency and helps measure typing speed accurately.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-pink-100 text-pink-600">
+                                    <i class="fas fa-check-circle text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Instant Feedback</h3>
+                                    <p class="text-gray-600">Provides immediate visual feedback (✅/❌) after each word submission.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-blue-100 text-blue-600">
+                                    <i class="fas fa-chart-bar text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Performance Stats</h3>
+                                    <p class="text-gray-600">Calculates and displays WPM (words per minute), accuracy, and total words typed at the end of each game.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Preview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Game Preview</h2>
+                        <div class="game-preview">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Typing Speed Game</h3>
+                                <p class="text-gray-600">Test your typing speed with programming terms</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-6 shadow-inner">
+                                <div class="text-center mb-4">
+                                    <p class="text-red-500 font-medium">Time: 45s</p>
+                                </div>
+                                <div class="text-center mb-6">
+                                    <p class="text-blue-600 text-2xl font-bold">dictionary</p>
+                                </div>
+                                <div class="mb-6">
+                                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type the word here...">
+                                </div>
+                                <div class="text-center mb-4">
+                                    <p class="text-green-500 font-medium">✅ Correct!</p>
+                                </div>
+                                <div class="text-center">
+                                    <button class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Start Game</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Word List -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Included Words</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                <span class="category-badge bg-blue-100 text-blue-800">python</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">keyboard</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">function</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">loop</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">variable</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">class</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">object</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">exception</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">list</span>
+                                <span class="category-badge bg-blue-100 text-blue-800">dictionary</span>
+                            </div>
+                            <p class="mt-4 text-gray-600">The word list focuses on fundamental programming concepts to reinforce terminology while practicing typing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Installation & Setup -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Installation & Usage</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
+                            <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+                                <li>Python 3.6 or higher</li>
+                                <li>Tkinter (usually included with Python)</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Running the Application</h3>
+                            <div class="code-block mb-4">
+                                <pre><code># Clone the repository
+git clone https://github.com/yourusername/typing-game.git
+cd typing-game
+
+# Run the application
+python typing_game.py</code></pre>
+                            </div>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">How to Play</h3>
+                            <ol class="list-decimal pl-6 text-gray-600 space-y-2">
+                                <li>Click "Start Game" to begin the 60-second challenge</li>
+                                <li>Type the word displayed on screen and press Enter</li>
+                                <li>Receive immediate feedback on your answer</li>
+                                <li>Continue typing words until time runs out</li>
+                                <li>View your final stats (WPM, accuracy, etc.)</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Code Highlights -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Code Highlights</h2>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Word List Initialization</h3>
+                        <div class="code-block mb-6">
+                            <pre><code># Word list
+words = ["python", "keyboard", "function", "loop", 
+         "variable", "class", "object", "exception", 
+         "list", "dictionary"]</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Game Initialization</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>def __init__(self, root):
+    self.root = root
+    self.root.title("Typing Speed Game")
+    self.root.geometry("500x350")
+    self.root.resizable(False, False)
+    
+    # UI Elements
+    self.label = tk.Label(root, text="Typing Speed Game", 
+                         font=("Helvetica", 18))
+    self.label.pack(pady=10)
+    
+    self.timer_label = tk.Label(root, text="Time: 60s",
+                               font=("Helvetica", 14), fg="red")
+    self.timer_label.pack()
+    
+    self.word_label = tk.Label(root, text="",
+                             font=("Helvetica", 24), fg="blue")
+    self.word_label.pack(pady=10)
+    
+    self.entry = tk.Entry(root, font=("Helvetica", 16))
+    self.entry.pack(pady=10)
+    self.entry.bind("&lt;Return&gt;", self.check_word)
+    
+    # ... additional UI elements ...</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Word Checking Logic</h3>
+                        <div class="code-block">
+                            <pre><code>def check_word(self, event=None):
+    typed_word = self.entry.get().strip()
+    current_word = self.shuffled_words[self.current_index]
+    
+    if typed_word == current_word:
+        self.feedback.config(text="✅ Correct!", fg="green")
+        self.correct_count += 1
+    else:
+        self.feedback.config(text=f"❌ Incorrect! It was '{current_word}'", fg="red")
+    
+    self.current_index += 1
+    self.show_word()</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Project Details Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-8">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Project Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Status</h4>
+                                    <p class="mt-1 text-gray-800">Completed</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Technologies</h4>
+                                    <div class="mt-2 flex flex-wrap gap-2">
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Python</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Tkinter</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">random</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">time</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Repository</h4>
+                                    <a href="https://github.com/yourusername/typing-game" target="_blank" class="mt-1 text-indigo-600 hover:text-indigo-800 break-all">github.com/yourusername/typing-game</a>
+                                </div>
+                                <!-- <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">License</h4>
+                                    <p class="mt-1 text-gray-800">MIT License</p>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Tags</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 text-xs rounded">python</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">gui</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">typing</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 text-xs rounded">education</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Challenges & Solutions -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Challenges & Solutions</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Real-time Feedback</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Implemented immediate visual feedback using color-coded labels (green for correct, red for incorrect) to enhance user experience.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Timer Accuracy</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Used Python's time module to ensure precise 60-second countdown and accurate WPM calculation.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Word Randomization</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Employed random.sample() to shuffle words while ensuring no duplicates during a game session.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Enhancements -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Future Enhancements</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add difficulty levels with different word lists (beginner, intermediate, advanced)</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Implement user profiles to track progress over time</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add sound effects for correct/incorrect answers</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Create an executable version for easy distribution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Links -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Documentation</h3>
+                            <div class="space-y-3">
+                                <a href="https://github.com/yourusername/typing-game/blob/main/README.md" target="_blank" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fab fa-github mr-2"></i> README.md
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-file-pdf mr-2"></i> User Guide
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-video mr-2"></i> Demo Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">mikeCodeCraft</span>
+                    <p class="text-gray-400 mt-2">Simplifying digital life with code.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Michael Barnabas. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Copy code blocks to clipboard
+        document.querySelectorAll('.code-block').forEach(block => {
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="far fa-copy"></i>';
+            button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+            button.title = 'Copy to clipboard';
+
+            button.addEventListener('click', () => {
+                const code = block.querySelector('code').textContent;
+                navigator.clipboard.writeText(code);
+
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.className = 'absolute top-2 right-2 text-green-500';
+
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                    button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+                }, 2000);
+            });
+
+            block.style.position = ''});
+        
+    </script>
+</html>

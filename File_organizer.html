@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Organizer | MikeCodeCraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .screenshot {
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .screenshot:hover {
+            transform: scale(1.02);
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold gradient-text">mikeCodeCraft</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="index.html#about" class="nav-link px-3 py-2 text-sm font-medium">About</a>
+                        <a href="index.html#skills" class="nav-link px-3 py-2 text-sm font-medium">Skills</a>
+                        <a href="projects.html" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+                        <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-indigo-500 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="pt-32 pb-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mb-4">Python GUI Application</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">File Organizer</h1>
+                    <p class="text-xl max-w-3xl">A desktop application that automatically organizes files into categorized folders with undo functionality</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/yourusername/file-organizer" target="_blank" class="px-6 py-3 bg-white text-indigo-600 rounded-full font-medium hover:bg-gray-100 transition flex items-center">
+                        <i class="fab fa-github mr-2"></i> View on GitHub
+                    </a>
+                    <a href="projects.html" class="px-6 py-3 border border-white text-white rounded-full font-medium hover:bg-white hover:text-indigo-600 transition">
+                        Back to Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Project Overview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Project Overview</h2>
+                        <div class="prose max-w-none text-gray-600">
+                            <p class="mb-4">The File Organizer is a Python application built with Tkinter that helps users automatically sort their files into categorized folders based on file extensions. It features a simple graphical interface that allows users to select a folder and organize its contents with a single click.</p>
+                            <p class="mb-4">This project was developed to solve the common problem of cluttered download or document folders. Instead of manually creating folders and moving files, this application automates the entire process while maintaining the ability to undo changes if needed.</p>
+                            <p>The application includes a comprehensive categorization system, undo functionality through logging, and error handling to ensure files aren't lost during the organization process.</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Key Features</h2>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="feature-icon bg-indigo-100 text-indigo-600">
+                                    <i class="fas fa-folder-open text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Smart File Categorization</h3>
+                                    <p class="text-gray-600">Automatically sorts files into predefined categories (Images, Documents, Videos, etc.) based on their extensions.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-purple-100 text-purple-600">
+                                    <i class="fas fa-undo text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Undo Functionality</h3>
+                                    <p class="text-gray-600">Maintains a log of all file movements, allowing users to revert changes with a single click.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-pink-100 text-pink-600">
+                                    <i class="fas fa-desktop text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">User-Friendly GUI</h3>
+                                    <p class="text-gray-600">Built with Tkinter for a clean, intuitive interface that works across Windows, macOS, and Linux.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-blue-100 text-blue-600">
+                                    <i class="fas fa-cog text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Customizable Categories</h3>
+                                    <p class="text-gray-600">Easily modify the FILE_CATEGORIES dictionary to add new file types or change existing categories.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screenshots/Demo -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Application Screenshots</h2>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="File Organizer Interface" class="screenshot w-full h-auto">
+                                <p class="mt-2 text-sm text-gray-500 text-center">File Organizer Main Interface</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- File Categories -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Supported File Categories</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Images</h3>
+                                    <div>
+                                        <span class="category-badge bg-blue-100 text-blue-800">.jpg</span>
+                                        <span class="category-badge bg-blue-100 text-blue-800">.jpeg</span>
+                                        <span class="category-badge bg-blue-100 text-blue-800">.png</span>
+                                        <span class="category-badge bg-blue-100 text-blue-800">.gif</span>
+                                        <span class="category-badge bg-blue-100 text-blue-800">.bmp</span>
+                                        <span class="category-badge bg-blue-100 text-blue-800">.svg</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Documents</h3>
+                                    <div>
+                                        <span class="category-badge bg-purple-100 text-purple-800">.pdf</span>
+                                        <span class="category-badge bg-purple-100 text-purple-800">.docx</span>
+                                        <span class="category-badge bg-purple-100 text-purple-800">.doc</span>
+                                        <span class="category-badge bg-purple-100 text-purple-800">.txt</span>
+                                        <span class="category-badge bg-purple-100 text-purple-800">.pptx</span>
+                                        <span class="category-badge bg-purple-100 text-purple-800">.xlsx</span>
+                                        <span class="category-badge bg-purple-100 text-purple-800">.odt</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Videos</h3>
+                                    <div>
+                                        <span class="category-badge bg-red-100 text-red-800">.mp4</span>
+                                        <span class="category-badge bg-red-100 text-red-800">.mkv</span>
+                                        <span class="category-badge bg-red-100 text-red-800">.mov</span>
+                                        <span class="category-badge bg-red-100 text-red-800">.avi</span>
+                                        <span class="category-badge bg-red-100 text-red-800">.flv</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Audio</h3>
+                                    <div>
+                                        <span class="category-badge bg-green-100 text-green-800">.mp3</span>
+                                        <span class="category-badge bg-green-100 text-green-800">.wav</span>
+                                        <span class="category-badge bg-green-100 text-green-800">.aac</span>
+                                        <span class="category-badge bg-green-100 text-green-800">.flac</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Archives</h3>
+                                    <div>
+                                        <span class="category-badge bg-yellow-100 text-yellow-800">.zip</span>
+                                        <span class="category-badge bg-yellow-100 text-yellow-800">.rar</span>
+                                        <span class="category-badge bg-yellow-100 text-yellow-800">.7z</span>
+                                        <span class="category-badge bg-yellow-100 text-yellow-800">.tar</span>
+                                        <span class="category-badge bg-yellow-100 text-yellow-800">.gz</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Code</h3>
+                                    <div>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.py</span>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.js</span>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.html</span>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.css</span>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.java</span>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.c</span>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.cpp</span>
+                                        <span class="category-badge bg-indigo-100 text-indigo-800">.json</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Installers</h3>
+                                    <div>
+                                        <span class="category-badge bg-pink-100 text-pink-800">.exe</span>
+                                        <span class="category-badge bg-pink-100 text-pink-800">.msi</span>
+                                        <span class="category-badge bg-pink-100 text-pink-800">.dmg</span>
+                                        <span class="category-badge bg-pink-100 text-pink-800">.deb</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3">Others</h3>
+                                    <p class="text-gray-600">Any file with an extension not in the above categories will be moved to an "Others" folder.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Installation & Setup -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Installation & Usage</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
+                            <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+                                <li>Python 3.6 or higher</li>
+                                <li>Tkinter (usually included with Python)</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Running the Application</h3>
+                            <div class="code-block mb-4">
+                                <pre><code># Clone the repository
+git clone https://github.com/yourusername/file-organizer.git
+cd file-organizer
+
+# Run the application
+python file_organizer.py</code></pre>
+                            </div>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">How to Use</h3>
+                            <ol class="list-decimal pl-6 text-gray-600 space-y-2">
+                                <li>Click "Browse Folder" to select the folder you want to organize</li>
+                                <li>View the list of files in the selected folder</li>
+                                <li>Click "Organize Files" to automatically sort files into categories</li>
+                                <li>If needed, use "Undo Last Organize" to revert changes</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Code Highlights -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Code Highlights</h2>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">File Categorization Logic</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>FILE_CATEGORIES = {
+    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"],
+    "Documents": [".pdf", ".docx", ".doc", ".txt", ".pptx", ".xlsx", ".odt"],
+    "Videos": [".mp4", ".mkv", ".mov", ".avi", ".flv"],
+    "Audio": [".mp3", ".wav", ".aac", ".flac"],
+    "Archives": [".zip", ".rar", ".7z", ".tar", ".gz"],
+    "Code": [".py", ".js", ".html", ".css", ".java", ".c", ".cpp", ".json"],
+    "Installers": [".exe", ".msi", ".dmg", ".deb"],
+}</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">File Organization Function</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>def organize_files():
+    path = folder_path.get()
+    if not path:
+        messagebox.showwarning("No Folder", "Please select a folder first.")
+        return
+
+    moved_files = {}  # Track moved files for undo functionality
+
+    try:
+        for filename in os.listdir(path):
+            file_path = os.path.join(path, filename)
+            
+            if os.path.isfile(file_path):
+                file_ext = os.path.splitext(filename)[1].lower()
+                moved = False
+                
+                # Check each category for matching extension
+                for category, extensions in FILE_CATEGORIES.items():
+                    if file_ext in extensions:
+                        new_path = move_file_to_category(file_path, path, category)
+                        moved_files[new_path] = file_path  # log: new → old
+                        moved = True
+                        break
+                
+                # If no category matched, move to "Others"
+                if not moved:
+                    new_path = move_file_to_category(file_path, path, "Others")
+                    moved_files[new_path] = file_path
+
+        # Save undo log
+        with open("organizer_log.json", "w") as f:
+            json.dump(moved_files, f)
+
+        messagebox.showinfo("Success", "Files have been organized!")
+        list_files(path)  # Refresh file list
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to organize files:\n{e}")</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Undo Functionality</h3>
+                        <div class="code-block">
+                            <pre><code>def undo_organize():
+    if not os.path.exists("organizer_log.json"):
+        messagebox.showinfo("Nothing to Undo", "No organization log found.")
+        return
+
+    try:
+        with open("organizer_log.json", "r") as f:
+            moved_files = json.load(f)
+
+        # Move files back to their original locations
+        for new_path, original_path in moved_files.items():
+            if os.path.exists(new_path):
+                shutil.move(new_path, original_path)
+
+        # Remove the log file after undo
+        os.remove("organizer_log.json")
+        
+        messagebox.showinfo("Undo Complete", "Files moved back successfully.")
+        list_files(folder_path.get())  # Refresh file list
+    except Exception as e:
+        messagebox.showerror("Error", f"Undo failed:\n{e}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Project Details Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-8">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Project Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Status</h4>
+                                    <p class="mt-1 text-gray-800">Completed (Active Maintenance)</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Technologies</h4>
+                                    <div class="mt-2 flex flex-wrap gap-2">
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Python</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Tkinter</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">os</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">shutil</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">json</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Repository</h4>
+                                    <a href="https://github.com/yourusername/file-organizer" target="_blank" class="mt-1 text-indigo-600 hover:text-indigo-800 break-all">github.com/yourusername/file-organizer</a>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">License</h4>
+                                    <p class="mt-1 text-gray-800">MIT License</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Tags</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 text-xs rounded">python</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">gui</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">file-management</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 text-xs rounded">productivity</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Challenges & Solutions -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Challenges & Solutions</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Cross-Platform Compatibility</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Used Python's built-in Tkinter for the GUI to ensure the application works on Windows, macOS, and Linux without modification.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Undo Functionality</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Implemented a JSON-based logging system that records all file movements, enabling reliable undo operations.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Error Handling</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Added comprehensive try-catch blocks to prevent crashes and provide user-friendly error messages.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Enhancements -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Future Enhancements</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add support for custom category definitions through a configuration file</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Implement a preview feature before actually moving files</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add support for organizing files based on creation/modification dates</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Create an executable version for easy distribution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Links -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Documentation</h3>
+                            <div class="space-y-3">
+                                <a href="https://github.com/yourusername/file-organizer/blob/main/README.md" target="_blank" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fab fa-github mr-2"></i> README.md
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-file-pdf mr-2"></i> User Guide
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-video mr-2"></i> Demo Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">mikeCodeCraft</span>
+                    <p class="text-gray-400 mt-2">Simplifying digital life with code.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Michael Barnabas. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Copy code blocks to clipboard
+        document.querySelectorAll('.code-block').forEach(block => {
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="far fa-copy"></i>';
+            button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+            button.title = 'Copy to clipboard';
+            
+            button.addEventListener('click', () => {
+                const code = block.querySelector('code').textContent;
+                navigator.clipboard.writeText(code);
+                
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.className = 'absolute top-2 right-2 text-green-500';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                    button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+                }, 2000);
+            });
+            
+            block.style.position = 'relative';
+            block.appendChild(button);
+        });
+    </script>
+</body>
+</html>

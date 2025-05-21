@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Remover | mikeCodeCraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .drop-zone {
+            border: 2px dashed #cbd5e0;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.active {
+            border-color: #6366f1;
+            background-color: #f0f4ff;
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        .before-after {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .before-after img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #6366f1;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            cursor: ew-resize;
+        }
+        .slider:before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #6366f1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold gradient-text">mikeCodeCraft</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#home" class="px-3 py-2 text-sm font-medium hover:text-indigo-600">Home</a>
+                        <a href="index.html#about" class="px-3 py-2 text-sm font-medium hover:text-indigo-600">About</a>
+                        <a href="index.html#skills" class="px-3 py-2 text-sm font-medium hover:text-indigo-600">Skills</a>
+                        <a href="projects.html" class="px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+                        <a href="index.html#contact" class="px-3 py-2 text-sm font-medium hover:text-indigo-600">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-indigo-500 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="pt-32 pb-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mb-4">Python GUI Application</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Background Remover</h1>
+                    <p class="text-xl max-w-3xl">A desktop application that automatically removes backgrounds from images using AI</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/yourusername/background-remover" target="_blank" class="px-6 py-3 bg-white text-indigo-600 rounded-full font-medium hover:bg-gray-100 transition flex items-center">
+                        <i class="fab fa-github mr-2"></i> View on GitHub
+                    </a>
+                    <a href="projects.html" class="px-6 py-3 border border-white text-white rounded-full font-medium hover:bg-white hover:text-indigo-600 transition">
+                        Back to Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Project Overview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Project Overview</h2>
+                        <div class="prose max-w-none text-gray-600">
+                            <p class="mb-4">The Background Remover is a Python application that leverages AI to automatically remove backgrounds from images with a simple drag-and-drop interface. Built with Tkinter and the rembg library, it provides an easy way to process single images or entire folders of images.</p>
+                            <p class="mb-4">This tool was developed to simplify the process of creating transparent PNGs from regular images, eliminating the need for complex photo editing software. It's particularly useful for e-commerce product images, profile pictures, and graphic design projects.</p>
+                            <p>The application features a clean interface with multiple input methods (drag-and-drop, file browser, folder browser) and automatically saves processed images with "_no_bg" appended to the filename.</p>
+                        </div>
+                    </div>
+
+                    <!-- Before/After Demo -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Before & After</h2>
+                        <div class="before-after">
+                            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Before" class="before-image">
+                            <img src="https://i.imgur.com/JQJQZQT.png" alt="After" class="after-image">
+                            <div class="slider"></div>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Key Features</h2>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="feature-icon bg-indigo-100 text-indigo-600">
+                                    <i class="fas fa-magic text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">AI-Powered Removal</h3>
+                                    <p class="text-gray-600">Uses the rembg library which leverages AI models to accurately detect and remove backgrounds from images.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-purple-100 text-purple-600">
+                                    <i class="fas fa-mouse-pointer text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Multiple Input Methods</h3>
+                                    <p class="text-gray-600">Supports drag-and-drop, file selection, and folder selection for batch processing.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-pink-100 text-pink-600">
+                                    <i class="fas fa-folder-open text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Batch Processing</h3>
+                                    <p class="text-gray-600">Process all images in a folder at once, saving time when working with multiple files.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-blue-100 text-blue-600">
+                                    <i class="fas fa-image text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Automatic Saving</h3>
+                                    <p class="text-gray-600">Saves processed images with "_no_bg" suffix in the same location as the original.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Application Preview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Application Preview</h2>
+                        <div class="bg-gray-100 rounded-xl p-8">
+                            <div class="bg-white rounded-lg shadow-md p-6 max-w-md mx-auto">
+                                <div class="text-center mb-6">
+                                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Background Remover</h3>
+                                    <p class="text-gray-600">Drag & drop images or folders here</p>
+                                </div>
+                                <div class="drop-zone border-2 border-dashed rounded-lg p-8 mb-6 text-center cursor-pointer">
+                                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                                    <p class="text-gray-500">Drag files here or click to browse</p>
+                                </div>
+                                <div class="flex flex-col space-y-3">
+                                    <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition flex items-center justify-center">
+                                        <i class="fas fa-image mr-2"></i> Choose Image
+                                    </button>
+                                    <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition flex items-center justify-center">
+                                        <i class="fas fa-folder mr-2"></i> Choose Folder
+                                    </button>
+                                </div>
+                                <div class="mt-6 text-center text-sm text-gray-500">
+                                    <p>Created by mikeCodeCraft</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Supported Formats -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Supported Formats</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-image text-blue-500 mr-2"></i>
+                                    <span>PNG</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-image text-blue-500 mr-2"></i>
+                                    <span>JPG</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-image text-blue-500 mr-2"></i>
+                                    <span>JPEG</span>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-gray-600">The application automatically detects and processes all common image formats. Output is always saved as PNG to preserve transparency.</p>
+                        </div>
+                    </div>
+
+                    <!-- Installation & Setup -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Installation & Usage</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
+                            <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+                                <li>Python 3.6 or higher</li>
+                                <li>Tkinter (usually included with Python)</li>
+                                <li>For drag-and-drop support: tkinterdnd2 (optional)</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Installation</h3>
+                            <div class="code-block mb-4">
+                                <pre><code># Clone the repository
+git clone https://github.com/yourusername/background-remover.git
+cd background-remover
+
+# Install dependencies
+pip install rembg pillow tkinterdnd2</code></pre>
+                            </div>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">How to Use</h3>
+                            <ol class="list-decimal pl-6 text-gray-600 space-y-2">
+                                <li>Run the application: <code>python background_remover.py</code></li>
+                                <li>Drag and drop an image or folder onto the window</li>
+                                <li>OR use the buttons to select an image or folder</li>
+                                <li>Processed images will be saved automatically with "_no_bg" suffix</li>
+                                <li>The processed image will open in your default image viewer</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Code Highlights -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Code Highlights</h2>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Image Processing Function</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>def process_image(input_file, output_file):
+    """Remove background from image and save result"""
+    image = Image.open(input_file)
+    result = remove(image)  # Uses rembg library
+    result.save(output_file)
+    result.show()  # Show the result</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Input Handling</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>def handle_input(path):
+    """Handle both file and folder inputs"""
+    if os.path.isdir(path):
+        # Process all images in folder
+        files = [f for f in os.listdir(path) 
+                if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+        for file in files:
+            input_file = os.path.join(path, file)
+            output_file = os.path.join(path, f"{os.path.splitext(file)[0]}_no_bg.png")
+            process_image(input_file, output_file)
+    elif os.path.isfile(path):
+        # Process single file
+        filename_wo_ext = os.path.splitext(os.path.basename(path))[0]
+        output_file = os.path.join(os.path.dirname(path), f"{filename_wo_ext}_no_bg.png")
+        process_image(path, output_file)
+    else:
+        messagebox.showwarning("Invalid Input", "Please provide a valid file or folder.")</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Drag-and-Drop Implementation</h3>
+                        <div class="code-block">
+                            <pre><code>try:
+    from tkinterdnd2 import DND_FILES, TkinterDnD
+    root = TkinterDnD.Tk()  # Create window with DnD support
+    label.drop_target_register(DND_FILES)
+    label.dnd_bind('&lt;&lt;Drop&gt;&gt;', on_drop)
+except ImportError:
+    print("Drag-and-drop requires tkinterdnd2")
+    root = tk.Tk()  # Fallback to regular Tkinter</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Project Details Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-8">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Project Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Status</h4>
+                                    <p class="mt-1 text-gray-800">Completed</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Technologies</h4>
+                                    <div class="mt-2 flex flex-wrap gap-2">
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Python</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Tkinter</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">rembg</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Pillow</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">tkinterdnd2</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Repository</h4>
+                                    <a href="https://github.com/yourusername/background-remover" target="_blank" class="mt-1 text-indigo-600 hover:text-indigo-800 break-all">github.com/yourusername/background-remover</a>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">License</h4>
+                                    <p class="mt-1 text-gray-800">MIT License</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Tags</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 text-xs rounded">python</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">gui</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">image-processing</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 text-xs rounded">ai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Challenges & Solutions -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Challenges & Solutions</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Drag-and-Drop Support</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Implemented optional tkinterdnd2 library for cross-platform drag-and-drop functionality with graceful fallback.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Batch Processing</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Added folder scanning to automatically process all supported images in a directory.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">File Management</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Created robust file handling to ensure proper paths and prevent overwriting original files.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Enhancements -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Future Enhancements</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add progress bar for batch processing</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Implement output format selection (PNG/JPG)</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add manual refinement tools for edge cases</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Create executable version for easy distribution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Links -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Documentation</h3>
+                            <div class="space-y-3">
+                                <a href="https://github.com/yourusername/background-remover/blob/main/README.md" target="_blank" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fab fa-github mr-2"></i> README.md
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-file-pdf mr-2"></i> User Guide
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-video mr-2"></i> Demo Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">mikeCodeCraft</span>
+                    <p class="text-gray-400 mt-2">Simplifying digital life with code.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Michael Barnabas. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Before/After slider functionality
+        const beforeAfter = document.querySelector('.before-after');
+        const slider = document.querySelector('.slider');
+        const beforeImage = document.querySelector('.before-image');
+        let isDragging = false;
+
+        slider.addEventListener('mousedown', () => {
+            isDragging = true;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const containerRect = beforeAfter.getBoundingClientRect();
+            let x = e.clientX - containerRect.left;
+            
+            // Keep slider within container bounds
+            x = Math.max(0, Math.min(x, containerRect.width));
+            
+            const percent = (x / containerRect.width) * 100;
+            
+            beforeImage.style.width = `${percent}%`;
+            slider.style.left = `${percent}%`;
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Drop zone interaction
+        const dropZone = document.querySelector('.drop-zone');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            dropZone.classList.add('active');
+        }
+
+        function unhighlight() {
+            dropZone.classList.remove('active');
+        }
+
+        dropZone.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            // Handle dropped files here
+            console.log('Files dropped:', files);
+        }
+    </script>
+</body>
+</html>

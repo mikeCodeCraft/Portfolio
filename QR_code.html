@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator | MikeCodeCraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .screenshot {
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .screenshot:hover {
+            transform: scale(1.02);
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .tech-badge {
+            transition: all 0.2s ease;
+        }
+        .tech-badge:hover {
+            transform: scale(1.05);
+        }
+        .qr-type-btn {
+            transition: all 0.2s ease;
+        }
+        .qr-type-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold gradient-text">mikeCodeCraft</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="index.html#about" class="nav-link px-3 py-2 text-sm font-medium">About</a>
+                        <a href="index.html#skills" class="nav-link px-3 py-2 text-sm font-medium">Skills</a>
+                        <a href="projects.html" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+                        <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-indigo-500 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="pt-32 pb-20 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full mb-4">Python GUI Application</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">QR Code Generator</h1>
+                    <p class="text-xl max-w-3xl">A desktop application that generates customizable QR codes with logo embedding and color options</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/yourusername/qr-code-generator" target="_blank" class="px-6 py-3 bg-white text-indigo-600 rounded-full font-medium hover:bg-gray-100 transition flex items-center">
+                        <i class="fab fa-github mr-2"></i> View on GitHub
+                    </a>
+                    <a href="projects.html" class="px-6 py-3 border border-white text-white rounded-full font-medium hover:bg-white hover:text-indigo-600 transition">
+                        Back to Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Project Overview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Project Overview</h2>
+                        <div class="prose max-w-none text-gray-600">
+                            <p class="mb-4">The QR Code Generator is a Python application built with Tkinter that allows users to create customized QR codes with various features including logo embedding, color customization, and support for different QR code types (URL, WiFi login, email, WhatsApp).</p>
+                            <p class="mb-4">This project was developed to provide an easy-to-use tool for generating professional QR codes without requiring online services. It offers local processing, ensuring data privacy and the ability to work offline.</p>
+                            <p>The application includes advanced features like error correction, high-resolution output, and the ability to save generated QR codes in PNG format. It's designed to be intuitive while providing powerful customization options.</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Key Features</h2>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="feature-icon bg-indigo-100 text-indigo-600">
+                                    <i class="fas fa-qrcode text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Multiple QR Types</h3>
+                                    <p class="text-gray-600">Supports various QR code types including URLs, WiFi login credentials, email addresses, and WhatsApp numbers.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-purple-100 text-purple-600">
+                                    <i class="fas fa-image text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Logo Embedding</h3>
+                                    <p class="text-gray-600">Option to embed a company logo or icon in the center of the QR code for branding purposes.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-pink-100 text-pink-600">
+                                    <i class="fas fa-palette text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Color Customization</h3>
+                                    <p class="text-gray-600">Customize both foreground and background colors of the QR code for better visual integration.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-blue-100 text-blue-600">
+                                    <i class="fas fa-shield-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Error Correction</h3>
+                                    <p class="text-gray-600">Built-in error correction (H level) ensures QR codes remain scannable even when partially damaged.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Screenshots/Demo -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Application Screenshots</h2>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <img src="https://images.unsplash.com/photo-1620014324101-e5b8a3d9f9e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="QR Code Generator Interface" class="screenshot w-full h-auto">
+                                <p class="mt-2 text-sm text-gray-500 text-center">QR Code Generator Main Interface</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <img src="https://images.unsplash.com/photo-1541140134513-85a161dc7a72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Generated QR Code" class="screenshot w-full h-auto">
+                                    <p class="mt-2 text-sm text-gray-500 text-center">Generated QR Code with Logo</p>
+                                </div>
+                                <div>
+                                    <img src="https://images.unsplash.com/photo-1633114128814-11fac33f707b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Color Customization" class="screenshot w-full h-auto">
+                                    <p class="mt-2 text-sm text-gray-500 text-center">Color Customization Options</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QR Code Types -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Supported QR Code Types</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3 flex items-center">
+                                        <span class="qr-type-btn mr-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm">URL/Text</span>
+                                        Standard QR Code
+                                    </h3>
+                                    <p class="text-gray-600">Encodes any text or URL that will open in a browser when scanned.</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3 flex items-center">
+                                        <span class="qr-type-btn mr-2 px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-sm">WiFi Login</span>
+                                        WiFi Credentials
+                                    </h3>
+                                    <p class="text-gray-600">Generates QR codes that automatically connect devices to WiFi networks when scanned. Format: "SSID,Password".</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3 flex items-center">
+                                        <span class="qr-type-btn mr-2 px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm">Email</span>
+                                        Email Address
+                                    </h3>
+                                    <p class="text-gray-600">Creates QR codes that open the default email client with a new message to the specified address.</p>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg mb-3 flex items-center">
+                                        <span class="qr-type-btn mr-2 px-3 py-1 rounded-full bg-red-100 text-red-800 text-sm">WhatsApp</span>
+                                        WhatsApp Contact
+                                    </h3>
+                                    <p class="text-gray-600">Generates QR codes that open a chat with the specified phone number in WhatsApp.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Installation & Setup -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Installation & Usage</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
+                            <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+                                <li>Python 3.6 or higher</li>
+                                <li>Tkinter (usually included with Python)</li>
+                                <li>Additional packages: qrcode, Pillow</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Install Dependencies</h3>
+                            <div class="code-block mb-4">
+                                <pre><code>pip install qrcode[pil] pillow</code></pre>
+                            </div>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Running the Application</h3>
+                            <div class="code-block mb-4">
+                                <pre><code># Clone the repository
+git clone https://github.com/yourusername/qr-code-generator.git
+cd qr-code-generator
+
+# Run the application
+python qr_generator.py</code></pre>
+                            </div>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">How to Use</h3>
+                            <ol class="list-decimal pl-6 text-gray-600 space-y-2">
+                                <li>Select the QR code type from the dropdown menu</li>
+                                <li>Enter the required data in the input field</li>
+                                <li>(Optional) Upload a logo and customize colors</li>
+                                <li>Click "Generate QR Code" to create your QR</li>
+                                <li>Use "Save QR Code" to save the generated image</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Code Highlights -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Code Highlights</h2>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">QR Code Generation Function</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>def generate_qr():
+    global generated_qr_img  # Store globally for save button
+    data_type = qr_type_cb.get()
+    user_data = text_entry.get()
+    
+    if not user_data:
+        messagebox.showwarning("Input Error", "Please enter required data.")
+        return
+
+    # Format data based on type
+    if data_type == "URL/Text":
+        qr_data = user_data
+    elif data_type == "WiFi Login":
+        try:
+            ssid, password = user_data.split(",", 1)
+            qr_data = f"WIFI:T:WPA;S:{ssid};P:{password};;"
+        except ValueError:
+            messagebox.showwarning("Input Error", "Please enter SSID and password separated by a comma.")
+            return
+    elif data_type == "Email":
+        qr_data = f"mailto:{user_data}"
+    elif data_type == "whatsapp":
+        qr_data = f"https://wa.me/{user_data}"
+    else:
+        qr_data = user_data
+
+    # Create QR with error correction
+    qr = qrcode.QRCode(
+        version=None,  # Automatic version sizing
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=4
+    )
+    qr.add_data(qr_data)
+    qr.make(fit=True)
+
+    # Apply custom colors
+    fill_color = fg_color_var.get() or "black"
+    back_color = bg_color_var.get() or "white"
+    qr_img = qr.make_image(fill_color=fill_color, back_color=back_color).convert('RGB')
+
+    # Embed logo if available
+    if logo_path:
+        try:
+            logo = Image.open(logo_path)
+            logo_size = 60
+            logo = logo.resize((logo_size, logo_size), Image.LANCZOS)
+
+            qr_width, qr_height = qr_img.size
+            pos = ((qr_width - logo_size) // 2, (qr_height - logo_size) // 2)
+            qr_img.paste(logo, pos, mask=logo if logo.mode == 'RGBA' else None)
+        except Exception as e:
+            messagebox.showerror("Logo Error", f"Failed to embed logo: {e}")
+
+    # Display QR in GUI
+    fixed_size = 250
+    qr_img_resized = qr_img.resize((fixed_size, fixed_size), Image.LANCZOS)
+    qr_img_tk = ImageTk.PhotoImage(qr_img_resized)
+    qr_label.config(image=qr_img_tk)
+    qr_label.image = qr_img_tk
+
+    generated_qr_img = qr_img  # Save original for saving</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Logo Upload Function</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>def upload_logo():
+    global logo_path
+    path = filedialog.askopenfilename(
+        filetypes=[("Image Files", "*.png *.jpg *.jpeg *.bmp")]
+    )
+    if path:
+        logo_path = path
+        logo_label.config(text=f"Logo selected ✔️")</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Color Selection</h3>
+                        <div class="code-block">
+                            <pre><code>def choose_fg_color():
+    color = colorchooser.askcolor()[1]
+    if color:
+        fg_color_var.set(color)
+        fg_color_label.config(text=f"FG: {color}")
+
+def choose_bg_color():
+    color = colorchooser.askcolor()[1]
+    if color:
+        bg_color_var.set(color)
+        bg_color_label.config(text=f"BG: {color}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Project Details Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-8">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Project Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Status</h4>
+                                    <p class="mt-1 text-gray-800">Completed (Active Maintenance)</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Technologies</h4>
+                                    <div class="mt-2 flex flex-wrap gap-2">
+                                        <span class="tech-badge bg-gray-100 px-2 py-1 text-xs rounded">Python</span>
+                                        <span class="tech-badge bg-gray-100 px-2 py-1 text-xs rounded">Tkinter</span>
+                                        <span class="tech-badge bg-gray-100 px-2 py-1 text-xs rounded">qrcode</span>
+                                        <span class="tech-badge bg-gray-100 px-2 py-1 text-xs rounded">Pillow</span>
+                                        <span class="tech-badge bg-gray-100 px-2 py-1 text-xs rounded">PIL</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Repository</h4>
+                                    <a href="https://github.com/yourusername/qr-code-generator" target="_blank" class="mt-1 text-indigo-600 hover:text-indigo-800 break-all">github.com/yourusername/qr-code-generator</a>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">License</h4>
+                                    <p class="mt-1 text-gray-800">MIT License</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Tags</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 text-xs rounded">python</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">gui</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">qr-codes</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 text-xs rounded">productivity</span>
+                                <span class="bg-pink-100 text-pink-800 px-2 py-1 text-xs rounded">image-processing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Challenges & Solutions -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Challenges & Solutions</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Logo Embedding</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Ensuring the logo doesn't interfere with QR code scanning required careful positioning and transparency handling.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Color Customization</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Implemented color contrast validation to maintain QR code readability while allowing customization.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Error Correction</h4>
+                                    <p class="mt-1 text-sm text-gray-600">Used high error correction level (H) to ensure QR codes remain scannable even with logos or minor damage.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Enhancements -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Future Enhancements</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add batch processing for generating multiple QR codes at once</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Implement QR code scanning functionality to decode existing codes</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add more QR code types (vCard, calendar events, etc.)</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-indigo-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Create an executable version for easy distribution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Links -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Documentation</h3>
+                            <div class="space-y-3">
+                                <a href="https://github.com/yourusername/qr-code-generator/blob/main/README.md" target="_blank" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fab fa-github mr-2"></i> README.md
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-file-pdf mr-2"></i> User Guide
+                                </a>
+                                <a href="#" class="flex items-center text-indigo-600 hover:text-indigo-800">
+                                    <i class="fas fa-video mr-2"></i> Demo Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">mikeCodeCraft</span>
+                    <p class="text-gray-400 mt-2">Simplifying digital life with code.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Michael Barnabas. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Copy code blocks to clipboard
+        document.querySelectorAll('.code-block').forEach(block => {
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="far fa-copy"></i>';
+            button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+            button.title = 'Copy to clipboard';
+            
+            button.addEventListener('click', () => {
+                const code = block.querySelector('code').textContent;
+                navigator.clipboard.writeText(code);
+                
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.className = 'absolute top-2 right-2 text-green-500';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                    button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+                }, 2000);
+            });
+            
+            block.style.position = 'relative';
+            block.appendChild(button);
+        });
+
+        // Add hover effect to technology badges
+        document.querySelectorAll('.tech-badge').forEach(badge => {
+            badge.addEventListener('mouseenter', () => {
+                badge.classList.add('shadow-md');
+            });
+            badge.addEventListener('mouseleave', () => {
+                badge.classList.remove('shadow-md');
+            });
+        });
+
+        // QR type buttons interaction
+        document.querySelectorAll('.qr-type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.qr-type-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-blue-500', 'text-white');
+                });
+                this.classList.add('active', 'bg-blue-500', 'text-white');
+            });
+        });
+    </script>
+</body>
+</html>

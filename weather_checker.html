@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App | MikeCodeCraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .weather-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .weather-icon {
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .temperature-display {
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1;
+        }
+        .weather-detail {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold gradient-text">mikeCodeCraft</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="index.html#about" class="nav-link px-3 py-2 text-sm font-medium">About</a>
+                        <a href="index.html#skills" class="nav-link px-3 py-2 text-sm font-medium">Skills</a>
+                        <a href="projects.html" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+                        <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md text-gray-700 hover:text-indigo-500 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="pt-32 pb-20 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mb-4">Python GUI Application</span>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Weather App</h1>
+                    <p class="text-xl max-w-3xl">A desktop application that fetches and displays real-time weather data for any city worldwide</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/yourusername/weather-app" target="_blank" class="px-6 py-3 bg-white text-blue-600 rounded-full font-medium hover:bg-gray-100 transition flex items-center">
+                        <i class="fab fa-github mr-2"></i> View on GitHub
+                    </a>
+                    <a href="projects.html" class="px-6 py-3 border border-white text-white rounded-full font-medium hover:bg-white hover:text-blue-600 transition">
+                        Back to Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Project Overview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Project Overview</h2>
+                        <div class="prose max-w-none text-gray-600">
+                            <p class="mb-4">The Weather App is a Python application built with Tkinter that retrieves and displays current weather conditions for any city using the OpenWeatherMap API. It provides a simple graphical interface where users can enter a city name and instantly see temperature, humidity, wind speed, and weather conditions.</p>
+                            <p class="mb-4">This project was developed to demonstrate API integration with Python GUI applications. It handles various edge cases including invalid city names, network errors, and API limitations while providing a clean, responsive interface.</p>
+                            <p>The application includes comprehensive error handling, responsive UI elements, and clear display of weather data with appropriate icons representing different weather conditions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Key Features</h2>
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="feature-icon bg-blue-100 text-blue-600">
+                                    <i class="fas fa-cloud-sun text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Real-Time Weather Data</h3>
+                                    <p class="text-gray-600">Fetches current weather conditions including temperature, humidity, wind speed, and weather description for any city worldwide.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-indigo-100 text-indigo-600">
+                                    <i class="fas fa-globe text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">OpenWeatherMap API Integration</h3>
+                                    <p class="text-gray-600">Utilizes the OpenWeatherMap API to provide accurate and up-to-date weather information with proper error handling.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-purple-100 text-purple-600">
+                                    <i class="fas fa-desktop text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">User-Friendly GUI</h3>
+                                    <p class="text-gray-600">Built with Tkinter for a clean, intuitive interface that works across Windows, macOS, and Linux.</p>
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="feature-icon bg-pink-100 text-pink-600">
+                                    <i class="fas fa-exclamation-triangle text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Comprehensive Error Handling</h3>
+                                    <p class="text-gray-600">Gracefully handles invalid inputs, API errors, and network issues with user-friendly error messages.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- App Preview -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Application Preview</h2>
+                        <div class="weather-card p-8">
+                            <div class="flex flex-col items-center text-center">
+                                <h3 class="text-2xl font-semibold mb-2">Current Weather</h3>
+                                <div class="flex items-center justify-center my-6">
+                                    <div class="weather-icon w-24 h-24 mr-4">
+                                        <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather icon" class="w-full h-full">
+                                    </div>
+                                    <div class="temperature-display">24°C</div>
+                                </div>
+                                <p class="text-xl font-medium mb-6">Sunny</p>
+                                
+                                <div class="grid grid-cols-2 gap-4 w-full max-w-md">
+                                    <div class="weather-detail p-4">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-tint text-blue-500 mr-2"></i>
+                                            <span>Humidity</span>
+                                        </div>
+                                        <div class="text-xl font-semibold mt-1">65%</div>
+                                    </div>
+                                    <div class="weather-detail p-4">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-wind text-gray-500 mr-2"></i>
+                                            <span>Wind Speed</span>
+                                        </div>
+                                        <div class="text-xl font-semibold mt-1">12 km/h</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-8 w-full max-w-md">
+                                    <div class="relative">
+                                        <input 
+                                            type="text" 
+                                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                            placeholder="Enter city name"
+                                        >
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fas fa-search text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    <button class="mt-4 w-full px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition">
+                                        Get Weather
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Installation & Setup -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Installation & Usage</h2>
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Prerequisites</h3>
+                            <ul class="list-disc pl-6 mb-6 text-gray-600 space-y-2">
+                                <li>Python 3.6 or higher</li>
+                                <li>Tkinter (usually included with Python)</li>
+                                <li>requests library (<code>pip install requests</code>)</li>
+                                <li>OpenWeatherMap API key (free tier available)</li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Running the Application</h3>
+                            <div class="code-block mb-4">
+                                <pre><code># Clone the repository
+git clone https://github.com/yourusername/weather-app.git
+cd weather-app
+
+# Install dependencies
+pip install requests
+
+# Run the application (replace YOUR_API_KEY with actual key)
+python weather_app.py</code></pre>
+                            </div>
+                            
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">How to Use</h3>
+                            <ol class="list-decimal pl-6 text-gray-600 space-y-2">
+                                <li>Enter your OpenWeatherMap API key in the code</li>
+                                <li>Run the application</li>
+                                <li>Type a city name in the input field</li>
+                                <li>Click "Get Weather" or press Enter</li>
+                                <li>View the current weather conditions for the specified city</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Code Highlights -->
+                    <div class="mb-12">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-900">Code Highlights</h2>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">API Key Configuration</h3>
+                        <div class="code-block mb-6">
+                            <pre><code># OpenWeatherMap API Key
+API_KEY = "your_api_key_here"  # Replace with your actual API key</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Weather Data Fetching Function</h3>
+                        <div class="code-block mb-6">
+                            <pre><code>def get_weather():
+    city = city_entry.get()
+    if not city:
+        messagebox.showwarning("No City", "Please enter a city name.")
+        return
+    
+    try:
+        # Make API request
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+        response = requests.get(url).json()
+        
+        # Check for valid response
+        if response.get("main"):
+            temp = response["main"]["temp"]
+            weather = response["weather"][0]["description"].title()
+            humidity = response["main"]["humidity"]
+            wind_speed = response["wind"]["speed"]
+            
+            # Update UI with weather data
+            result_label.config(
+                text=f"Temperature in {city.title()}: {temp}°C\n"
+                     f"Condition: {weather}\n"
+                     f"Humidity: {humidity}%\n"
+                     f"Wind Speed: {wind_speed} km/h"
+            )
+        else:
+            message = response.get("message", "Unknown error.")
+            messagebox.showerror("Error", f"Failed to get weather: {message.capitalize()}")
+            
+    except requests.exceptions.RequestException as e:
+        messagebox.showerror("Network Error", f"Failed to connect: {e}")</code></pre>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">GUI Setup</h3>
+                        <div class="code-block">
+                            <pre><code># Create GUI window
+root = tk.Tk()
+root.title("Weather App")
+root.geometry("300x200")
+root.resizable(False, False)  # Disable resizing
+
+# City input
+city_entry = tk.Entry(root, font=("Arial", 14))
+city_entry.pack(pady=10)
+
+# Search button
+search_button = tk.Button(root, text="Get Weather", command=get_weather)
+search_button.pack()
+
+# Result label
+result_label = tk.Label(root, text="", font=("Arial", 12), 
+                       wraplength=280, justify="center")
+result_label.pack(pady=20)
+
+# Run the app
+root.mainloop()</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Project Details Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-8">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Project Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Status</h4>
+                                    <p class="mt-1 text-gray-800">Completed (Active Maintenance)</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Technologies</h4>
+                                    <div class="mt-2 flex flex-wrap gap-2">
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Python</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">Tkinter</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">requests</span>
+                                        <span class="bg-gray-100 px-2 py-1 text-xs rounded">OpenWeatherMap API</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Repository</h4>
+                                    <a href="https://github.com/yourusername/weather-app" target="_blank" class="mt-1 text-blue-600 hover:text-blue-800 break-all">github.com/yourusername/weather-app</a>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">License</h4>
+                                    <p class="mt-1 text-gray-800">MIT License</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4">
+                            <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Tags</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 text-xs rounded">python</span>
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 text-xs rounded">gui</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 text-xs rounded">api</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 text-xs rounded">weather</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather Conditions -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Weather Conditions</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/01d@2x.png" class="w-10 h-10 mr-3" alt="Clear sky">
+                                    <span>Clear sky</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/02d@2x.png" class="w-10 h-10 mr-3" alt="Few clouds">
+                                    <span>Few clouds</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/03d@2x.png" class="w-10 h-10 mr-3" alt="Scattered clouds">
+                                    <span>Scattered clouds</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/09d@2x.png" class="w-10 h-10 mr-3" alt="Shower rain">
+                                    <span>Shower rain</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/10d@2x.png" class="w-10 h-10 mr-3" alt="Rain">
+                                    <span>Rain</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/11d@2x.png" class="w-10 h-10 mr-3" alt="Thunderstorm">
+                                    <span>Thunderstorm</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/13d@2x.png" class="w-10 h-10 mr-3" alt="Snow">
+                                    <span>Snow</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <img src="https://openweathermap.org/img/wn/50d@2x.png" class="w-10 h-10 mr-3" alt="Mist">
+                                    <span>Mist</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Enhancements -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Future Enhancements</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add 5-day weather forecast functionality</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Implement location detection using geolocation</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Add temperature unit toggle (Celsius/Fahrenheit)</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-500 mt-0.5">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </div>
+                                    <p class="ml-3 text-sm text-gray-600">Create an executable version for easy distribution</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Links -->
+                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-900">Documentation</h3>
+                            <div class="space-y-3">
+                                <a href="https://github.com/yourusername/weather-app/blob/main/README.md" target="_blank" class="flex items-center text-blue-600 hover:text-blue-800">
+                                    <i class="fab fa-github mr-2"></i> README.md
+                                </a>
+                                <a href="https://openweathermap.org/api" target="_blank" class="flex items-center text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-external-link-alt mr-2"></i> OpenWeatherMap API Docs
+                                </a>
+                                <a href="#" class="flex items-center text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-video mr-2"></i> Demo Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold gradient-text">mikeCodeCraft</span>
+                    <p class="text-gray-400 mt-2">Simplifying digital life with code.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Michael Barnabas. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Copy code blocks to clipboard
+        document.querySelectorAll('.code-block').forEach(block => {
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="far fa-copy"></i>';
+            button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+            button.title = 'Copy to clipboard';
+            
+            button.addEventListener('click', () => {
+                const code = block.querySelector('code').textContent;
+                navigator.clipboard.writeText(code);
+                
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.className = 'absolute top-2 right-2 text-green-500';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                    button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+                }, 2000);
+            });
+            
+            block.style.position = 'relative';
+            block.appendChild(button);
+        });
+
+        // Simulate weather search in the preview card
+        document.querySelector('.weather-card button').addEventListener('click', function() {
+            const cityInput = document.querySelector('.weather-card input');
+            if (cityInput.value.trim() === '') {
+                alert('Please enter a city name');
+                return;
+            }
+            
+            // This would be replaced with actual API call in a real implementation
+            alert(`Fetching weather for: ${cityInput.value}`);
+        });
+    </script>
+</body>
+</html>
