@@ -11,6 +11,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 mobileMenu.classList.add('hidden');
             });
         });
+
+        // Close mobile menu when clicking outside of it
+        window.addEventListener('scroll', function () {
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        })
+            // Hide mobile menu when clicking/touching outside of it
+        document.addEventListener('mousedown', function (e) {
+            if (!mobileMenu.classList.contains('hidden') &&
+                !mobileMenu.contains(e.target) &&
+                !menuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+        document.addEventListener('touchstart', function (e) {
+            if (!mobileMenu.classList.contains('hidden') &&
+                !mobileMenu.contains(e.target) &&
+                !menuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
     }
 
     // Copy code blocks to clipboard
@@ -34,4 +56,68 @@ document.addEventListener('DOMContentLoaded', function () {
         block.style.position = 'relative';
         block.appendChild(button);
     });
+     // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Project filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        const defaultFilter = document.querySelector('.filter-btn[data-filter="all"]');
+        if (defaultFilter) {
+            defaultFilter.classList.add('filter-active');
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('filter-active'));
+                // Add active class to clicked button
+                button.classList.add('filter-active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const categories = card.getAttribute('data-category')?.split(',') || [];
+
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                    // Optionally stop observing after animating once:
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
+        });
+    
 });
