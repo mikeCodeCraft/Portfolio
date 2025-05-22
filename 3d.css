@@ -210,8 +210,8 @@
     .a:before{
     content: '';
     position: absolute;
-    height: 70%;
-    width: 0px;
+    height: 100%;
+    width: 20px;
     background: #3b82f6;
     top: 10px;
     left: -20px;
@@ -221,7 +221,7 @@
     .a:after{
         content: "";
         position: absolute;
-        height: 0;
+        height: 20px;
         width: 100%;
         background: #ec4899;
         bottom: -20px;
