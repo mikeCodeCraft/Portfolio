@@ -77,6 +77,16 @@
         </div>
     </nav>
 
+    <div class="mobile-menu hidden md:hidden bg-white shadow-lg">
+    <div class="px-4 pt-4 pb-2 space-y-2">
+        <a href="index.html#home" class="block nav-link px-3 py-2 text-sm font-medium">Home</a>
+        <a href="index.html#about" class="block nav-link px-3 py-2 text-sm font-medium">About</a>
+        <a href="index.html#skills" class="block nav-link px-3 py-2 text-sm font-medium">Skills</a>
+        <a href="#" class="block nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+        <!-- <a href="index.html#contact" class="block nav-link px-3 py-2 text-sm font-medium">Contact</a> -->
+    </div>
+</div>
+
     <!-- Hero Section -->
     <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-white pt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
@@ -353,7 +363,7 @@
                         
                         </div>
                         <div class="flex space-x-3">
-                            <a href="weather_checker" class="text-indigo-600 hover:text-indigo-800">
+                            <a href="weather_checker.html" class="text-indigo-600 hover:text-indigo-800">
                                 <i class="fas fa-external-link-alt"></i> Details
                             </a>
                             <a href="#" class="text-gray-600 hover:text-gray-800">
@@ -509,11 +519,11 @@
         </div>
     </footer>
 
-    <script>
+<script>
         // Mobile menu toggle
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
+
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
@@ -522,29 +532,40 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
 
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fadeIn');
-                }
+        // Copy code blocks to clipboard
+        document.querySelectorAll('.code-block').forEach(block => {
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="far fa-copy"></i>';
+            button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+            button.title = 'Copy to clipboard';
+
+            button.addEventListener('click', () => {
+                const code = block.querySelector('code').textContent;
+                navigator.clipboard.writeText(code);
+
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                button.className = 'absolute top-2 right-2 text-green-500';
+
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                    button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
+                }, 2000);
             });
-        }, observerOptions);
 
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
+            // Ensure the code block is positioned relatively for the button
+            block.style.position = 'relative';
+            block.appendChild(button);
         });
+        
     </script>
 </body>
 </html>

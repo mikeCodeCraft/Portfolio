@@ -104,6 +104,16 @@
         </div>
     </nav>
 
+    <div class="mobile-menu hidden md:hidden bg-white shadow-lg">
+    <div class="px-4 pt-4 pb-2 space-y-2">
+        <a href="index.html#home" class="block nav-link px-3 py-2 text-sm font-medium">Home</a>
+        <a href="index.html#about" class="block nav-link px-3 py-2 text-sm font-medium">About</a>
+        <a href="index.html#skills" class="block nav-link px-3 py-2 text-sm font-medium">Skills</a>
+        <a href="#" class="block nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+        <!-- <a href="index.html#contact" class="block nav-link px-3 py-2 text-sm font-medium">Contact</a> -->
+    </div>
+</div>
+
     <!-- Project Header -->
     <section class="pt-32 pb-20 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -364,12 +374,12 @@ root.mainloop()</code></pre>
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Repository</h4>
-                                    <a href="https://github.com/yourusername/weather-app" target="_blank" class="mt-1 text-blue-600 hover:text-blue-800 break-all">github.com/yourusername/weather-app</a>
+                                    <a href="https://github.com/yourusername/weather-app" target="_blank" class="mt-1 text-blue-600 hover:text-blue-800 break-all">coming soon...</a>
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">License</h4>
                                     <p class="mt-1 text-gray-800">MIT License</p>
-                                </div>
+                                </div>  -->
                             </div>
                         </div>
                         <div class="bg-gray-50 px-6 py-4">
@@ -458,7 +468,7 @@ root.mainloop()</code></pre>
                     </div>
 
                     <!-- Documentation Links -->
-                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                    <!-- <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-4 text-gray-900">Documentation</h3>
                             <div class="space-y-3">
@@ -473,7 +483,7 @@ root.mainloop()</code></pre>
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div>  -->
                 </div>
             </div>
         </div>
@@ -485,41 +495,30 @@ root.mainloop()</code></pre>
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
                     <span class="text-2xl font-bold gradient-text">mikeCodeCraft</span>
-                    <p class="text-gray-400 mt-2">Simplifying digital life with code.</p>
+                    <p class="text-gray-400 mt-2">Crafting digital experiences with code.</p>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition">
+                    <a href="https://github.com/mikeCodeCraft/" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-github"></i>
                     </a>
                     <a href="#" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
+                    <a href="https://x.com/mikeCodeCraft" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
+                   
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; 2023 Michael Barnabas. All rights reserved.
-                </p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Sitemap</a>
-                </div>
-            </div>
+            
         </div>
     </footer>
 
-    <script>
+<script>
         // Mobile menu toggle
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
+
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
@@ -528,12 +527,13 @@ root.mainloop()</code></pre>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
+
 
         // Copy code blocks to clipboard
         document.querySelectorAll('.code-block').forEach(block => {
@@ -541,36 +541,26 @@ root.mainloop()</code></pre>
             button.innerHTML = '<i class="far fa-copy"></i>';
             button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
             button.title = 'Copy to clipboard';
-            
+
             button.addEventListener('click', () => {
                 const code = block.querySelector('code').textContent;
                 navigator.clipboard.writeText(code);
-                
+
                 const originalIcon = button.innerHTML;
                 button.innerHTML = '<i class="fas fa-check"></i>';
                 button.className = 'absolute top-2 right-2 text-green-500';
-                
+
                 setTimeout(() => {
                     button.innerHTML = originalIcon;
                     button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
                 }, 2000);
             });
-            
+
+            // Ensure the code block is positioned relatively for the button
             block.style.position = 'relative';
             block.appendChild(button);
         });
-
-        // Simulate weather search in the preview card
-        document.querySelector('.weather-card button').addEventListener('click', function() {
-            const cityInput = document.querySelector('.weather-card input');
-            if (cityInput.value.trim() === '') {
-                alert('Please enter a city name');
-                return;
-            }
-            
-            // This would be replaced with actual API call in a real implementation
-            alert(`Fetching weather for: ${cityInput.value}`);
-        });
+        
     </script>
 </body>
 </html>
