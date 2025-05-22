@@ -174,7 +174,6 @@
         /* flex-direction: column; */
         align-items: center;
     }
-
     .li {
         margin: 10px 0;
         padding: 10px;
@@ -183,6 +182,7 @@
     .a {
         width: 70px;
         height: 20px;
+
         transform: rotate(-10deg) skew(15deg);
         box-shadow: -10px 10px 6px #00000050;
     }
@@ -195,12 +195,16 @@
     .a .span {
         font-size: 6px;
         padding-left: 12px;
-        top: 10px;
+        top: 8px;
+        color: #eee;
     }
+
+    
 
     .fa-brands {
         font-size: 14px;
-        top: 10px;
+        top: 8px;
+
     }
 
     .a:before{
@@ -219,7 +223,6 @@
         position: absolute;
         height: 0;
         width: 100%;
-        
         background: #ec4899;
         bottom: -20px;
         left: -10px;

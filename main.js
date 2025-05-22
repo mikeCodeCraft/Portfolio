@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', function () {
         menuButton.addEventListener('click', function () {
             mobileMenu.classList.toggle('hidden');
         });
-// Hide mobile menu when a link is clicked
-mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', function () {
-        mobileMenu.classList.add('hidden');
+        // Hide mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                mobileMenu.classList.add('hidden');
             });
         });
     }
-});
+
     // Copy code blocks to clipboard
     document.querySelectorAll('.code-block').forEach(block => {
         const button = document.createElement('button');
@@ -34,3 +34,4 @@ mobileMenu.querySelectorAll('a').forEach(link => {
         block.style.position = 'relative';
         block.appendChild(button);
     });
+});
