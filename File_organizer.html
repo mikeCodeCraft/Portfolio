@@ -82,8 +82,8 @@
                         <a href="index.html#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
                         <a href="index.html#about" class="nav-link px-3 py-2 text-sm font-medium">About</a>
                         <a href="index.html#skills" class="nav-link px-3 py-2 text-sm font-medium">Skills</a>
-                        <a href="projects.html" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
-                        <!-- <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a> -->
+                        <a href="index.html#projects" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+                        <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -97,13 +97,13 @@
         </div>
     </nav>
 
-        <div class="mobile-menu hidden md:hidden bg-white shadow-lg">
-    <div class="px-4 pt-4 pb-2 space-y-2">
-        <a href="index.html#home" class="block nav-link px-3 py-2 text-sm font-medium">Home</a>
-        <a href="index.html#about" class="block nav-link px-3 py-2 text-sm font-medium">About</a>
-        <a href="index.html#skills" class="block nav-link px-3 py-2 text-sm font-medium">Skills</a>
-        <a href="#" class="block nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
-        <!-- <a href="index.html#contact" class="block nav-link px-3 py-2 text-sm font-medium">Contact</a> -->
+    <div class="mobile-menu hidden md:hidden bg-white shadow-lg fixed top-16 left-0 w-full z-50">
+        <div class="px-4 pt-4 pb-2 space-y-2">
+            <a href="index.html#home" class="block nav-link px-3 py-2 text-sm font-medium">Home</a>
+            <a href="index.html#about" class="block nav-link px-3 py-2 text-sm font-medium">About</a>
+            <a href="index.html#skills" class="block nav-link px-3 py-2 text-sm font-medium">Skills</a>
+            <a href="index.html#projects" class="block nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+            <!-- <a href="index.html#contact" class="block nav-link px-3 py-2 text-sm font-medium">Contact</a> -->
     </div>
 </div>
 
@@ -330,14 +330,14 @@ python file_organizer.py</code></pre>
                         <h3 class="text-xl font-semibold mb-4 text-gray-800">File Categorization Logic</h3>
                         <div class="code-block mb-6">
                             <pre><code>FILE_CATEGORIES = {
-                                    "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"],
-                                    "Documents": [".pdf", ".docx", ".doc", ".txt", ".pptx", ".xlsx", ".odt"],
-                                    "Videos": [".mp4", ".mkv", ".mov", ".avi", ".flv"],
-                                    "Audio": [".mp3", ".wav", ".aac", ".flac"],
-                                    "Archives": [".zip", ".rar", ".7z", ".tar", ".gz"],
-                                    "Code": [".py", ".js", ".html", ".css", ".java", ".c", ".cpp", ".json"],
-                                    "Installers": [".exe", ".msi", ".dmg", ".deb"],
-                                }</code></pre>
+        "Images": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg"],
+        "Documents": [".pdf", ".docx", ".doc", ".txt", ".pptx", ".xlsx", ".odt"],
+        "Videos": [".mp4", ".mkv", ".mov", ".avi", ".flv"],
+        "Audio": [".mp3", ".wav", ".aac", ".flac"],
+        "Archives": [".zip", ".rar", ".7z", ".tar", ".gz"],
+        "Code": [".py", ".js", ".html", ".css", ".java", ".c", ".cpp", ".json"],
+        "Installers": [".exe", ".msi", ".dmg", ".deb"],
+    }</code></pre>
                         </div>
                         
                         <h3 class="text-xl font-semibold mb-4 text-gray-800">File Organization Function</h3>
@@ -551,32 +551,6 @@ python file_organizer.py</code></pre>
         </div>
     </footer>
 
-    <script>
-        // Copy code blocks to clipboard
-        document.querySelectorAll('.code-block').forEach(block => {
-            const button = document.createElement('button');
-            button.innerHTML = '<i class="far fa-copy"></i>';
-            button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
-            button.title = 'Copy to clipboard';
-
-            button.addEventListener('click', () => {
-                const code = block.querySelector('code').textContent;
-                navigator.clipboard.writeText(code);
-
-                const originalIcon = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i>';
-                button.className = 'absolute top-2 right-2 text-green-500';
-
-                setTimeout(() => {
-                    button.innerHTML = originalIcon;
-                    button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
-                }, 2000);
-            });
-
-            // Ensure the code block is positioned relatively for the button
-            block.style.position = 'relative';
-            block.appendChild(button);
-        });
-    </script>
+<script src="main.js"></script>
 </body>
 </html>

@@ -94,8 +94,8 @@
                         <a href="index.html#home" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
                         <a href="index.html#about" class="nav-link px-3 py-2 text-sm font-medium">About</a>
                         <a href="index.html#skills" class="nav-link px-3 py-2 text-sm font-medium">Skills</a>
-                        <a href="projects.html" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
-                        <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
+                        <a href="index.html#projects" class="nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+                        <!-- <a href="index.html#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a> -->
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -109,12 +109,12 @@
         </div>
     </nav>
 
-    <div class="mobile-menu hidden md:hidden bg-white shadow-lg">
+    <div class="mobile-menu hidden md:hidden bg-white shadow-lg fixed top-16 left-0 w-full z-50">
     <div class="px-4 pt-4 pb-2 space-y-2">
         <a href="index.html#home" class="block nav-link px-3 py-2 text-sm font-medium">Home</a>
         <a href="index.html#about" class="block nav-link px-3 py-2 text-sm font-medium">About</a>
         <a href="index.html#skills" class="block nav-link px-3 py-2 text-sm font-medium">Skills</a>
-        <a href="#" class="block nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
+        <a href="index.html#projects" class="block nav-link px-3 py-2 text-sm font-medium text-indigo-600">Projects</a>
         <!-- <a href="index.html#contact" class="block nav-link px-3 py-2 text-sm font-medium">Contact</a> -->
     </div>
 </div>
@@ -227,7 +227,7 @@
                         </div>
                     </div>
 
-                    <!-- Word List -->
+                    <!-- Word List
                     <div class="mb-12">
                         <h2 class="text-3xl font-bold mb-6 text-gray-900">Included Words</h2>
                         <div class="bg-gray-50 p-6 rounded-lg">
@@ -245,7 +245,7 @@
                             </div>
                             <p class="mt-4 text-gray-600">The word list focuses on fundamental programming concepts to reinforce terminology while practicing typing.</p>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Installation & Setup -->
                     <div class="mb-12">
@@ -260,7 +260,7 @@
                             <h3 class="text-xl font-semibold mb-4 text-gray-800">Running the Application</h3>
                             <div class="code-block mb-4">
                                 <pre><code># Clone the repository
-git clone https://github.com/coming soon...
+git clone https://github.com/mikeCodeCraft/Python_Mini_Projects/blob/main/typingGame.py
 cd typing-game
 
 # Run the application
@@ -358,7 +358,7 @@ words = ["python", "keyboard", "function", "loop",
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Repository</h4>
-                                    <a href="https://github.com/yourusername/typing-game" target="_blank" class="mt-1 text-indigo-600 hover:text-indigo-800 break-all">coming soon...</a>
+                                    <a href="https://github.com/yourusername/typing-game" target="_blank" class="mt-1 text-indigo-600 hover:text-indigo-800 break-all">https://github.com/mikeCodeCraft/Python_Mini_Projects</a>
                                 </div>
                                 <!-- <div>
                                     <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">License</h4>
@@ -432,7 +432,7 @@ words = ["python", "keyboard", "function", "loop",
                     </div>
 
                     <!-- Documentation Links -->
-                    <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
+                    <!-- <div class="mt-8 bg-white rounded-xl shadow-md overflow-hidden">
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-4 text-gray-900">Documentation</h3>
                             <div class="space-y-3">
@@ -447,7 +447,7 @@ words = ["python", "keyboard", "function", "loop",
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -478,48 +478,5 @@ words = ["python", "keyboard", "function", "loop",
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.mobile-menu-button');
-        const mobileMenu = document.querySelector('.mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Copy code blocks to clipboard
-        document.querySelectorAll('.code-block').forEach(block => {
-            const button = document.createElement('button');
-            button.innerHTML = '<i class="far fa-copy"></i>';
-            button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
-            button.title = 'Copy to clipboard';
-
-            button.addEventListener('click', () => {
-                const code = block.querySelector('code').textContent;
-                navigator.clipboard.writeText(code);
-
-                const originalIcon = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i>';
-                button.className = 'absolute top-2 right-2 text-green-500';
-
-                setTimeout(() => {
-                    button.innerHTML = originalIcon;
-                    button.className = 'absolute top-2 right-2 text-gray-400 hover:text-white';
-                }, 2000);
-            });
-
-            block.style.position = ''});
-        
-    </script>
+<script src="main.js"></script>
 </html>
